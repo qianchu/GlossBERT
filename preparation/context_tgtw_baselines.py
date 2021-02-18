@@ -15,7 +15,7 @@ for flag in ['c','w']:
         lines=open(csv_file).readlines()
         lines[0]='\t'.join(['target_id','label','sentence','gloss','sense_key\n'])
         for i in range(1,len(lines)):
-            target_id,label,sentence,gloss,target_i_start,target_i_end,sense_key=lines[i].split('\t')
+            target_id,label,sentence,gloss,tgt_i_start,tgt_i_end,sense_key=lines[i].split('\t')
             if flag=='c':
                 sentence=sentence.split()
                 del sentence[int(tgt_i_start):int(tgt_i_end)]
