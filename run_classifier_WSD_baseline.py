@@ -25,7 +25,7 @@ from tqdm import tqdm, trange
 from torch.nn import CrossEntropyLoss, MSELoss
 
 from file_utils import PYTORCH_PRETRAINED_BERT_CACHE, WEIGHTS_NAME, CONFIG_NAME
-from modeling import BertForTokenClassification, BertConfig
+from modeling import BertForTokenClassification, BertConfig, BertForSequenceClassification
 from tokenization import BertTokenizer
 from optimization import BertAdam, warmup_linear
 
@@ -383,6 +383,7 @@ def main():
                         help="Loss scaling to improve fp16 numeric stability. Only used when fp16 set to True.\n"
                              "0 (default value): dynamic loss scaling.\n"
                              "Positive power of 2: static loss scaling value.\n")
+    parser.add_argument('--sent_or_token',type='str',help='whether to evaluate on sentence or token level')
     args = parser.parse_args()
 
     if args.local_rank == -1 or args.no_cuda:
@@ -455,7 +456,12 @@ def main():
 
     # Prepare model
     cache_dir = args.cache_dir if args.cache_dir else os.path.join(str(PYTORCH_PRETRAINED_BERT_CACHE), 'distributed_{}'.format(args.local_rank))
-    model = BertForTokenClassification.from_pretrained(args.bert_model,
+    if args.sent_or_token =='token':
+        model = BertForTokenClassification.from_pretrained(args.bert_model,
+              cache_dir=cache_dir,
+              num_labels=num_labels)
+    elif args.sent_or_token == 'sent':
+        model= BertForSequenceClassification(args.bert_model,
               cache_dir=cache_dir,
               num_labels=num_labels)
  
