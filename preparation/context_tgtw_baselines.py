@@ -5,16 +5,17 @@ train_dataset = ['SemCor']
 
 file_path = []
 for dataset in eval_dataset:
-    file_path.append('./Evaluation_Datasets/' + dataset + '/' + dataset+'_test_sent_cls.csv')
+    file_path.append('./Evaluation_Datasets/' + dataset + '/' + dataset+'_test_token_cls.csv')
 for dataset in train_dataset:
-    file_path.append('./Training_Corpora/' + dataset + '/' + dataset.lower()+'_train_sent_cls.csv')
+    file_path.append('./Training_Corpora/' + dataset + '/' + dataset.lower()+'_train_token_cls.csv')
     
 for flag in ['c','w']:
     for csv_file in file_path:
             
         lines=open(csv_file).readlines()
+        lines[0]='\t'.join(['target_id','label','sentence','gloss','sense_key\n'])
         for i in range(1,len(lines)):
-            sentence,tgt_i_start,tgt_i_end,tgt_id,tgt_lemma, tgt_pos,sense_key=lines[i].split('\t')
+            target_id,label,sentence,gloss,target_index_start,target_index_end,sense_key=lines[i].split('\t')
             if flag=='c':
                 sentence=sentence.split()
                 del sentence[int(tgt_i_start):int(tgt_i_end)]
@@ -27,8 +28,8 @@ for flag in ['c','w']:
                 sentence=' '.join(w)
                 tgt_i_start,tgt_i_end=str(0),str(len(w))
 
-            lines[i]='\t'.join([sentence,tgt_i_start,tgt_i_end,tgt_id,tgt_lemma, tgt_pos,sense_key])
+            lines[i]='\t'.join([target_id,label,sentence, gloss,sense_key])
 
 
-        with open(csv_file+'_'+flag+'.csv','w') as f:
+        with open(csv_file+'_sent'+flag+'.csv','w') as f:
             f.write(''.join(lines))
