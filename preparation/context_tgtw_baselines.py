@@ -5,13 +5,13 @@ train_dataset = ['SemCor']
 
 file_path = []
 for dataset in eval_dataset:
-    file_path.append('./Evaluation_Datasets/' + dataset + '/' + dataset+'.csv')
+    file_path.append('./Evaluation_Datasets/' + dataset + '/' + dataset+'_test_sent_cls.csv')
 for dataset in train_dataset:
-    file_path.append('./Training_Corpora/' + dataset + '/' + dataset.lower()+'.csv')
+    file_path.append('./Training_Corpora/' + dataset + '/' + dataset.lower()+'_train_sent_cls.csv')
     
 for flag in ['c','w']:
     for csv_file in file_path:
-
+            
         lines=open(csv_file).readlines()
         for i in range(1,len(lines)):
             sentence,tgt_i_start,tgt_i_end,tgt_id,tgt_lemma, tgt_pos,sense_key=lines[i].split('\t')
