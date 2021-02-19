@@ -659,7 +659,10 @@ def main():
                         label_mask = label_mask.to(device)
 
                         with torch.no_grad():
-                            logits = model(input_ids=input_ids, token_type_ids=segment_ids, attention_mask=input_mask, labels=None, target_mask=target_mask)
+                            if args.sent_or_token=='token':
+                                logits = model(input_ids=input_ids, token_type_ids=segment_ids, attention_mask=input_mask, labels=None, target_mask=target_mask)
+                            elif args.sent_or_token=='sent':
+                                logits = model(input_ids=input_ids, token_type_ids=segment_ids, attention_mask=input_mask, labels=None)
 
                         logits = logits + label_mask
                         logits_ = F.softmax(logits, dim=-1)
