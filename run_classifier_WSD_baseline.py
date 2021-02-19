@@ -383,7 +383,7 @@ def main():
                         help="Loss scaling to improve fp16 numeric stability. Only used when fp16 set to True.\n"
                              "0 (default value): dynamic loss scaling.\n"
                              "Positive power of 2: static loss scaling value.\n")
-    parser.add_argument('--sent_or_token',type='str',help='whether to evaluate on sentence or token level')
+    parser.add_argument('--sent_or_token',type=str,help='whether to evaluate on sentence or token level')
     args = parser.parse_args()
 
     if args.local_rank == -1 or args.no_cuda:
