@@ -462,7 +462,6 @@ def main():
               num_labels=num_labels)
     elif args.sent_or_token == 'sent':
         model= BertForSequenceClassification(args.bert_model,
-              cache_dir=cache_dir,
               num_labels=num_labels)
  
     if args.fp16:
