@@ -587,8 +587,10 @@ def main():
                     all_label_mask.append(label_mask)
                 
                 all_label_mask = torch.tensor(all_label_mask, dtype=torch.float).to(device)
-
-                logits = model(input_ids=input_ids, token_type_ids=segment_ids, attention_mask=input_mask, labels=None, target_mask=target_mask)
+                if args.sent_or_token=='sent':
+                    logits = model(input_ids=input_ids, token_type_ids=segment_ids, attention_mask=input_mask, labels=None)
+                elif args.sent_or_token=='token':
+                    logits = model(input_ids=input_ids, token_type_ids=segment_ids, attention_mask=input_mask, labels=None, target_mask=target_mask)
 
                 logits = logits + all_label_mask
                 logits = F.softmax(logits, dim=-1)
