@@ -1113,7 +1113,7 @@ class BertForTokenClassification(BertPreTrainedModel):
             real_target = target_mask[num].unsqueeze(-1).expand(seq_len,self.config.hidden_size)
             target_output = sequence_output[num][real_target==1].view(-1, self.config.hidden_size)
             # target_output = torch.mean(target_output, dim=0, keepdim=True)
-            target_output=target_output[0]
+            target_output=target_output[:1]
 
             if num == 0:
                 output = target_output
