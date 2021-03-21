@@ -657,7 +657,7 @@ def main():
                 result['global_step'] = global_step
                 result['loss'] = loss
 
-                output_eval_file = os.path.join(args.output_dir, "eval_results.txt")
+                output_eval_file = os.path.join(args.output_dir, "eval_results_{0}.txt".format(os.path.basename(args.eval_data_dir).split('_')[0]))
                 with open(output_eval_file, "a+") as writer:
                     writer.write("epoch=%s\n"%str(epoch))
                     logger.info("***** Eval results *****")
@@ -692,7 +692,7 @@ def main():
         eval_loss, eval_accuracy = 0, 0
         nb_eval_steps, nb_eval_examples = 0, 0
 
-        with open(os.path.join(args.output_dir, "results.txt"),"w") as f:
+        with open(os.path.join(args.output_dir, "results_{0}.txt".format(os.path.basename(args.eval_data_dir).split('_')[0])),"w") as f:
             for input_ids, input_mask, segment_ids, label_ids, target_mask in tqdm(eval_dataloader, desc="Evaluating"):
                 input_ids = input_ids.to(device)
                 input_mask = input_mask.to(device)
@@ -737,7 +737,7 @@ def main():
         result['global_step'] = global_step
         result['loss'] = loss
 
-        output_eval_file = os.path.join(args.output_dir, "eval_results.txt")
+        output_eval_file = os.path.join(args.output_dir, "eval_results_{0}.txt".format(os.path.basename(args.eval_data_dir).split('_')[0]))
         with open(output_eval_file, "a+") as writer:
             logger.info("***** Eval results *****")
             for key in result.keys():
