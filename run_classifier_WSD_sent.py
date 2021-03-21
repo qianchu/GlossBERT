@@ -619,7 +619,7 @@ def main():
                 result['global_step'] = global_step
                 result['loss'] = loss
 
-                output_eval_file = os.path.join(args.output_dir, "eval_results.txt")
+                output_eval_file = os.path.join(args.output_dir, "eval_results_{0}.txt".format(os.path.basename(args.eval_data_dir).split('_')[0]))
                 with open(output_eval_file, "a+") as writer:
                     writer.write("epoch=%s\n"%str(epoch))
                     logger.info("***** Eval results *****")
