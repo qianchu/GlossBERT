@@ -17,5 +17,5 @@ for line in lines[1:]:
         candidate_num+=1
 
 print('mean candidate num',sum(candidate_nums)/len(candidate_nums))
-print('random performance',1/(sum(candidate_nums)/len(candidate_nums)))
+print('random performance',100/(sum(candidate_nums)/len(candidate_nums)))
 
