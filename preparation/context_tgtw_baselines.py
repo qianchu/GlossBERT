@@ -9,7 +9,7 @@ for dataset in eval_dataset:
 for dataset in train_dataset:
     file_path.append('./Training_Corpora/' + dataset + '/' + dataset.lower()+'_train_token_cls.csv')
     
-for flag in ['c','w']:
+for flag in ['c','w','none']:
     for csv_file in file_path:
             
         lines=open(csv_file).readlines()
@@ -27,6 +27,9 @@ for flag in ['c','w']:
                 w=sentence[int(tgt_i_start):int(tgt_i_end)]
                 sentence=' '.join(w)
                 tgt_i_start,tgt_i_end=str(0),str(len(w))
+            elif flag=='none':
+                sentence='[MASK]'
+                tgt_i_start,tgt_i_end=str(0),str(1)
 
             lines[i]='\t'.join([target_id,label,sentence, gloss,sense_key])
 
