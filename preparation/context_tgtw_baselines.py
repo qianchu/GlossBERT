@@ -11,9 +11,10 @@ for dataset in train_dataset:
     
 for flag in ['c','w','none']:
     for csv_file in file_path:
-            
+        lines_new=[]
         lines=open(csv_file).readlines()
-        lines[0]='\t'.join(['target_id','label','sentence','gloss','sense_key\n'])
+        lines_new.append('\t'.join(['target_id','label','sentence','gloss','sense_key\n']))
+        
         for i in range(1,len(lines)):
             target_id,label,sentence,gloss,tgt_i_start,tgt_i_end,sense_key=lines[i].split('\t')
             if flag=='c':
@@ -31,8 +32,12 @@ for flag in ['c','w','none']:
                 sentence='[MASK]'
                 tgt_i_start,tgt_i_end=str(0),str(1)
 
-            lines[i]='\t'.join([target_id,label,sentence, gloss,sense_key])
+            lines_new.append('\t'.join([target_id,label,sentence, gloss,sense_key]))
+            lines[i]='\t'.join([target_id,label,sentence,gloss,tgt_i_start,tgt_i_end,sense_key])
 
 
         with open(csv_file+'_sent'+flag+'.csv','w') as f:
-            f.write(''.join(lines))
+            f.write(''.join(lines_new))
+        if flag=='c':
+            with open(csv_file+'_token'+flag+'.csv','w') as f:
+                f.write(''.join(lines))
