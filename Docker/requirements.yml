@@ -12,5 +12,6 @@ dependencies:
   - pytorch=1.0.0
   - pip:
     - tensorflow==1.13.1
+    - pandas
 
 prefix: /opt/conda/envs/
