@@ -1,0 +1,16 @@
+name: glossbert
+
+channels:
+  - defaults
+  - anaconda
+  - pytorch
+  - conda-forge
+dependencies:
+  - numpy=1.15.4
+  - pip=18.1
+  - python=3.7.1
+  - pytorch=1.0.0
+  - pip:
+    - tensorflow==1.13.1
+
+prefix: /opt/conda/envs/
