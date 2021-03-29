@@ -1100,12 +1100,12 @@ class BertForTokenClassification(BertPreTrainedModel):
         self.num_labels = num_labels
         self.bert = BertModel(config)
         self.dropout = nn.Dropout(config.hidden_dropout_prob)
-        self.classifier = nn.Linear(config.hidden_size, num_labels)
+        self.classifier = nn.Linear(config.hidden_size*2, num_labels)
         self.apply(self.init_bert_weights)
         self.config = config
 
     def forward(self, input_ids, token_type_ids=None, attention_mask=None, labels=None, target_mask=None):
-        sequence_output, _ = self.bert(input_ids, token_type_ids, attention_mask, output_all_encoded_layers=False)
+        sequence_output, pooled_output = self.bert(input_ids, token_type_ids, attention_mask, output_all_encoded_layers=False)        
         sequence_output = self.dropout(sequence_output)
             
         batch_size, seq_len = target_mask.size()
@@ -1113,7 +1113,8 @@ class BertForTokenClassification(BertPreTrainedModel):
             real_target = target_mask[num].unsqueeze(-1).expand(seq_len,self.config.hidden_size)
             target_output = sequence_output[num][real_target==1].view(-1, self.config.hidden_size)
             # target_output = torch.mean(target_output, dim=0, keepdim=True)
-            target_output=target_output[:1]
+            # target_output=target_output[:1]
+            target_output=torch.cat([target_output[:1],pooled_output[num].view(-1,self.config.hidden_size)],1)
 
             if num == 0:
                 output = target_output
