@@ -36,7 +36,7 @@ for flag in ['c','w','none','token+sc','token+lc']:
                         follow_sent=follow_sent[:2]
                     sentence=prev_sent+w+follow_sent
                     sentence=' '.join(sentence)
-                    tgt_i_start,tgt_i_end=len(prev_sent),len(prev_sent)+int(tgt_i_end)-int(tgt_i_start)
+                    tgt_i_start,tgt_i_end=str(len(prev_sent)),str(len(prev_sent)+int(tgt_i_end)-int(tgt_i_start))
 
 
             elif flag=='token+sc':
