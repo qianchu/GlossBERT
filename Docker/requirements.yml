@@ -13,5 +13,9 @@ dependencies:
   - pip:
     - tensorflow==1.13.1
     - pandas
+    - requests
+    - boto3
+    - tqdm
+
 
 prefix: /opt/conda/envs/
