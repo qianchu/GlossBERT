@@ -60,10 +60,12 @@ for flag in ['c','w','none','token+sc','token+lc']:
 
             lines_new.append('\t'.join([target_id,label,sentence, gloss,sense_key]))
             lines[i]='\t'.join([target_id,label,sentence,gloss,tgt_i_start,tgt_i_end,sense_key])
-
+        
+        
+        if flag in ['c','token+sc','token+lc']:
+            with open(csv_file+'_token'+flag+'.csv','w') as f:
+                f.write(''.join(lines))
 
         with open(csv_file+'_sent'+flag+'.csv','w') as f:
             f.write(''.join(lines_new))
-        if flag=='c':
-            with open(csv_file+'_token'+flag+'.csv','w') as f:
-                f.write(''.join(lines))
+       
