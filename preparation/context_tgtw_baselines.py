@@ -49,6 +49,32 @@ for flag in ['c','w','none','token+sc','token+lc']:
                     random.shuffle(follow_sent)
                     sentence=prev_sent+w+follow_sent
                     sentence=' '.join(sentence)
+
+            elif flag=='lc':
+                    sentence=sentence.split()
+                    w= sentence[int(tgt_i_start):int(tgt_i_end)]
+                    del sentence[int(tgt_i_start):int(tgt_i_end)]
+                    prev_sent=sentence[:int(tgt_i_start)]
+                    if len(prev_sent)>2:
+                        prev_sent=prev_sent[-2:]
+                    follow_sent=sentence[int(tgt_i_start):]
+                    if len(follow_sent)>2:
+                        follow_sent=follow_sent[:2]
+                    sentence=prev_sent+['[MASK]']+follow_sent
+                    sentence=' '.join(sentence)
+                    tgt_i_start,tgt_i_end=str(len(prev_sent)),str(len(prev_sent)+int(tgt_i_end)-int(tgt_i_start))
+
+
+            elif flag=='sc':
+                    sentence=sentence.split()
+                    w= sentence[int(tgt_i_start):int(tgt_i_end)]
+                    del sentence[int(tgt_i_start):int(tgt_i_end)]
+                    prev_sent=sentence[:int(tgt_i_start)]
+                    random.shuffle(prev_sent)
+                    follow_sent=sentence[int(tgt_i_start):]
+                    random.shuffle(follow_sent)
+                    sentence=prev_sent+['[MASK]']+follow_sent
+                    sentence=' '.join(sentence)
             elif flag=='w':
                 sentence=sentence.split()
                 w=sentence[int(tgt_i_start):int(tgt_i_end)]
