@@ -10,7 +10,7 @@ for dataset in eval_dataset:
 for dataset in train_dataset:
     file_path.append('./Training_Corpora/' + dataset + '/' + dataset.lower()+'_train_token_cls.csv')
     
-for flag in ['c','w','none','token+sc','token+lc']:
+for flag in ['c','w','none','token+sc','token+lc','sc','lc']:
     for csv_file in file_path:
         lines_new=[]
         lines=open(csv_file).readlines()
