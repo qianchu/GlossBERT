@@ -121,7 +121,11 @@ class WSD_token_Processor(DataProcessor):
             # length = len(text_a.split(' '))
             # if length>max_sen_length: max_sen_length=length
             start_id = int(line[4])
-            end_id = int(line[5])
+            try:
+                end_id = int(line[5])
+            except ValueError as e:
+                print (e)
+                print (line)
             label = str(line[1])
 
             if i%1000==0:
