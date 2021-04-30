@@ -111,6 +111,8 @@ class WSD_token_Processor(DataProcessor):
         examples = []
         # max_sen_length = 0
         for (i, line) in enumerate(lines):
+            if len(line)!=7:
+                print ('NOT 7 FIELDS',line)
             # if set_type == 'train' and i >=1000: break
             # if set_type == 'dev' and i>=10000: break
             guid = "%s-%s" % (set_type, i)
