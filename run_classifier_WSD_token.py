@@ -133,14 +133,14 @@ class WSD_token_Processor(DataProcessor):
                 print("label=",label)
             label = str(line[1])
 
-            if i%1000==0:
-                print(i)
-                print("guid=",guid)
-                print("text_a=",text_a)
-                print("text_b=",text_b)
-                print("start_id=",start_id)
-                print("end_id=",end_id)
-                print("label=",label)
+            # if i%1000==0:
+            #     print(i)
+            #     print("guid=",guid)
+            #     print("text_a=",text_a)
+            #     print("text_b=",text_b)
+            #     print("start_id=",start_id)
+            #     print("end_id=",end_id)
+            #     print("label=",label)
 
             examples.append(
                 InputExample(guid=guid, text_a=text_a, start_id=start_id, end_id=end_id, 
