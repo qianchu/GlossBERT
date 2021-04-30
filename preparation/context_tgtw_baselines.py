@@ -50,6 +50,7 @@ for flag in ['c','w','none','token+sc','token+lc','sc','lc']:
                     sentence=prev_sent+w+follow_sent
                     sentence=' '.join(sentence)
 
+
             elif flag=='lc':
                     sentence=sentence.split()
                     w= sentence[int(tgt_i_start):int(tgt_i_end)]
