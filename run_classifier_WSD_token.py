@@ -125,12 +125,14 @@ class WSD_token_Processor(DataProcessor):
                 end_id = int(line[5])
             except ValueError as e:
                 print (e)
+                print (line)
                 print("guid=",guid)
                 print("text_a=",text_a)
                 print("text_b=",text_b)
                 print("start_id=",start_id)
                 print("end_id=",end_id)
                 print("label=",label)
+                sys.exit(1)
             label = str(line[1])
 
             # if i%1000==0:
