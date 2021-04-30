@@ -96,7 +96,7 @@ class WSD_token_Processor(DataProcessor):
 
     def get_dev_examples(self, data_dir, label_data_dir):
         """See base class."""
-        dev_data = pd.read_csv(data_dir, sep="\t", na_filter=False).values
+        dev_data = pd.read_csv(data_dir, sep="\t", quoting=3,doublequote=False,na_filter=False).values
         with open(os.path.join(label_data_dir,"lemma2index_dict.pkl"), 'rb') as p:
             lemma2index_dict = pickle.load(p)
         return self._create_examples(dev_data, "dev", lemma2index_dict)
