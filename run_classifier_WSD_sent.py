@@ -87,12 +87,12 @@ class WSD_sent_Processor(DataProcessor):
 
     def get_train_examples(self, data_dir):
         """See base class."""
-        train_data = pd.read_csv(data_dir, sep="\t", na_filter=False).values
+        train_data = pd.read_csv(data_dir, quoting=3,doublequote=False,sep="\t", na_filter=False).values
         return self._create_examples(train_data, "train")
 
     def get_dev_examples(self, data_dir):
         """See base class."""
-        dev_data = pd.read_csv(data_dir, sep="\t", na_filter=False).values
+        dev_data = pd.read_csv(data_dir, quoting=3,doublequote=False,sep="\t", na_filter=False).values
         return self._create_examples(dev_data, "dev")
 
     def get_labels(self):
